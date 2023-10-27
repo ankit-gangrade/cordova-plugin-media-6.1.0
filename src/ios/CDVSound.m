@@ -219,6 +219,7 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
         NSError* error = nil;
 
         self.avSession = [AVAudioSession sharedInstance];
+        [self.avSession setPrefersNoInterruptionsFromSystemAlerts:YES error:&error];
         if (error) {
             // is not fatal if can't get AVAudioSession , just log the error
             NSLog(@"error creating audio session: %@", [[error userInfo] description]);
