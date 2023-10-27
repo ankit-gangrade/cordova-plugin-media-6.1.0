@@ -219,7 +219,7 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
         NSError* error = nil;
 
         self.avSession = [AVAudioSession sharedInstance];
-      ABC
+        
         if (error) {
             // is not fatal if can't get AVAudioSession , just log the error
             NSLog(@"error creating audio session: %@", [[error userInfo] description]);
@@ -692,6 +692,8 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
                 [audioFile.recorder stop];
                 audioFile.recorder = nil;
             }
+            //no interuption code
+            [weakSelf.avSession setPrefersNoInterruptionsFromSystemAlerts:YES error:&error];
             // get the audioSession and set the category to allow recording when device is locked or ring/silent switch engaged
             if ([weakSelf hasAudioSession]) {
                 if (![weakSelf.avSession.category isEqualToString:AVAudioSessionCategoryPlayAndRecord]) {
