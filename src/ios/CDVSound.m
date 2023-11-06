@@ -699,7 +699,7 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
                     [weakSelf.avSession setCategory:AVAudioSessionCategoryRecord error:nil];
                 }
 
-                  [weakSelf.avSession setPrefersNoInterruptionsFromSystemAlerts:YES error:&error];
+            
 
               
                 if (![weakSelf.avSession setActive:YES error:&error]) {
