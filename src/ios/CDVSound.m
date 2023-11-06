@@ -692,14 +692,16 @@ BOOL keepAvAudioSessionAlwaysActive = NO;
                 [audioFile.recorder stop];
                 audioFile.recorder = nil;
             }
-            //no interuption code
-            [weakSelf.avSession setPrefersNoInterruptionsFromSystemAlerts:YES error:&error];
+          
             // get the audioSession and set the category to allow recording when device is locked or ring/silent switch engaged
             if ([weakSelf hasAudioSession]) {
                 if (![weakSelf.avSession.category isEqualToString:AVAudioSessionCategoryPlayAndRecord]) {
                     [weakSelf.avSession setCategory:AVAudioSessionCategoryRecord error:nil];
                 }
 
+                  weakSelf.avSession.prefersNoInterruptionsFromSystemAlerts = YES;
+
+              
                 if (![weakSelf.avSession setActive:YES error:&error]) {
                     // other audio with higher priority that does not allow mixing could cause this to fail
                     errorMsg = [NSString stringWithFormat:@"Unable to record audio: %@", [error localizedFailureReason]];
